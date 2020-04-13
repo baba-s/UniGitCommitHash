@@ -28,6 +28,19 @@ namespace UniGitCommitHash
 		}
 
 		/// <summary>
+		/// Git のコミットログを読み込んで返します
+		/// </summary>
+		public static string LoadCommitLog( CommitLogOption option )
+		{
+			var count        = option.Count;
+			var isNoMerges   = option.IsNoMerges;
+			var noMergesText = isNoMerges ? "--no-merges " : string.Empty;
+			var format       = option.Format;
+
+			return LoadImpl( $@"log -n {count} --date=short {noMergesText} --pretty=format:""{format}""" );
+		}
+
+		/// <summary>
 		/// Git のコミットハッシュを読み込むための関数
 		/// </summary>
 		private static string LoadImpl( string arguments )

@@ -58,5 +58,21 @@ namespace UniGitCommitHash
 		{
 			Debug.Log( $"[UniGitCommitHash] {GitCommitHashLoader.LoadShortCommitHash()}" );
 		}
+
+		/// <summary>
+		/// Unity メニューからコミットログをログ出力して確認するための関数
+		/// </summary>
+		[MenuItem( ITEM_NAME_ROOT + "コミットログをログ出力" )]
+		private static void LogCommitLog()
+		{
+			var option = new CommitLogOption
+			(
+				count: 10,
+				isNoMerges: false,
+				format: "%h %cd %cn %s"
+			);
+
+			Debug.Log( $"[UniGitCommitHash]\n{GitCommitHashLoader.LoadCommitLog( option )}" );
+		}
 	}
 }

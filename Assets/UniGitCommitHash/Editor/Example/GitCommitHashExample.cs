@@ -15,7 +15,7 @@ namespace UniGitCommitHash.Example
 		//================================================================================
 		// Git のコミットハッシュを管理するスクリプトの出力先
 		private const string OUTPUT_PATH = "Assets/Scripts/GitCommitHash.cs";
-		
+
 		//================================================================================
 		// 定数（static readonly）
 		//================================================================================
@@ -24,13 +24,22 @@ namespace UniGitCommitHash.Example
 {{
     public const string COMMIT_HASH       = ""{GitCommitHashCodeGenerator.COMMIT_HASH_TAG}"";
     public const string SHORT_COMMIT_HASH = ""{GitCommitHashCodeGenerator.SHORT_COMMIT_HASH_TAG}"";
+    public const string COMMIT_LOG        = @""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
 }}";
-		
+
+		// Git のコミットログを取得するオプション
+		private static readonly CommitLogOption COMMIT_LOG_OPTION = new CommitLogOption
+		(
+			count: 10,
+			isNoMerges: false,
+			format: "%h %cd %cn %s"
+		);
+
 		//================================================================================
 		// プロパティ
 		//================================================================================
 		public int callbackOrder => 0;
-		
+
 		//================================================================================
 		// 関数
 		//================================================================================
@@ -61,7 +70,8 @@ namespace UniGitCommitHash.Example
 			GitCommitHashCodeGenerator.Generate
 			(
 				outputPath: OUTPUT_PATH,
-				template: TEMPLATE
+				template: TEMPLATE,
+				commitLogOption: COMMIT_LOG_OPTION
 			);
 		}
 	}

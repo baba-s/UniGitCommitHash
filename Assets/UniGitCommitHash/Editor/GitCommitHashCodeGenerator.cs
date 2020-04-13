@@ -13,6 +13,7 @@ namespace UniGitCommitHash
 		//================================================================================
 		public const string COMMIT_HASH_TAG       = "#COMMIT_HASH#";       // コミットハッシュ置換対象のタグ
 		public const string SHORT_COMMIT_HASH_TAG = "#SHORT_COMMIT_HASH#"; // コミットハッシュ（短縮版）置換対象のタグ
+		public const string COMMIT_LOG_TAG        = "#COMMIT_LOG#";        // コミットログ置換対象のタグ
 
 		//================================================================================
 		// 関数（static）
@@ -28,6 +29,7 @@ namespace UniGitCommitHash
 		/// {{
 		///     public const string COMMIT_HASH       = ""{GitCommitHashCodeGenerator.COMMIT_HASH_TAG}"";
 		///     public const string SHORT_COMMIT_HASH = ""{GitCommitHashCodeGenerator.SHORT_COMMIT_HASH_TAG}"";
+		///     public const string COMMIT_LOG_TAG    = ""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
 		/// }}";
 		///
 		/// GitCommitHashCodeGenerator.Generate( outputPath, template );
@@ -35,8 +37,9 @@ namespace UniGitCommitHash
 		/// </example>
 		public static void Generate
 		(
-			string outputPath,
-			string template
+			string          outputPath,
+			string          template,
+			CommitLogOption commitLogOption
 		)
 		{
 			// 出力先のフォルダが存在しない場合は作成します
@@ -50,12 +53,14 @@ namespace UniGitCommitHash
 			// Git のコミットハッシュを読み込みます
 			var commitHash      = GitCommitHashLoader.LoadCommitHash();
 			var shortCommitHash = GitCommitHashLoader.LoadShortCommitHash();
+			var commitLog       = GitCommitHashLoader.LoadCommitLog( commitLogOption );
 
 			// コミットハッシュを埋め込んだスクリプトの文字列を作成します
 			var code = template;
 
 			code = code.Replace( COMMIT_HASH_TAG, commitHash );
 			code = code.Replace( SHORT_COMMIT_HASH_TAG, shortCommitHash );
+			code = code.Replace( COMMIT_LOG_TAG, commitLog );
 
 			// 作成した文字列をスクリプトとして保存します
 			File.WriteAllText( outputPath, code );
