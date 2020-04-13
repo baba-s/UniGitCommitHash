@@ -29,7 +29,7 @@ namespace UniGitCommitHash
 		/// {{
 		///     public const string COMMIT_HASH       = ""{GitCommitHashCodeGenerator.COMMIT_HASH_TAG}"";
 		///     public const string SHORT_COMMIT_HASH = ""{GitCommitHashCodeGenerator.SHORT_COMMIT_HASH_TAG}"";
-		///     public const string COMMIT_LOG_TAG    = ""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
+		///     public const string COMMIT_LOG_TAG    = @""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
 		/// }}";
 		///
 		/// GitCommitHashCodeGenerator.Generate( outputPath, template );
