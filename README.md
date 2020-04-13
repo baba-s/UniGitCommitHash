@@ -11,11 +11,19 @@ Git のコミットハッシュを管理するスクリプトを生成するエ�
 ```cs
 var outputPath = "Assets/Scripts/GitCommitHash.cs";
 
+var option = new CommitLogOption
+(
+	count: 10,
+	isNoMerges: false,
+	format: "%h %cd %cn %s"
+);
+
 var template = $@"public static class GitCommitHash
 {{
     public const string COMMIT_HASH       = ""{GitCommitHashCodeGenerator.COMMIT_HASH_TAG}"";
     public const string SHORT_COMMIT_HASH = ""{GitCommitHashCodeGenerator.SHORT_COMMIT_HASH_TAG}"";
+    public const string COMMIT_LOG_TAG    = @""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
 }}";
 
-GitCommitHashCodeGenerator.Generate( outputPath, template );
+GitCommitHashCodeGenerator.Generate( outputPath, template, option );
 ```
