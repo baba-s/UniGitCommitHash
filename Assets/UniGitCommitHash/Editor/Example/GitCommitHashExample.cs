@@ -70,8 +70,7 @@ namespace UniGitCommitHash.Example
 			GitCommitHashCodeGenerator.Generate
 			(
 				outputPath: OUTPUT_PATH,
-				template: TEMPLATE,
-				commitLogOption: COMMIT_LOG_OPTION
+				template: TEMPLATE
 			);
 		}
 	}

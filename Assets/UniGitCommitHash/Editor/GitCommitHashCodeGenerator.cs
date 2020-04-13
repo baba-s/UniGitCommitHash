@@ -73,5 +73,14 @@ namespace UniGitCommitHash
 			File.WriteAllText( outputPath, code );
 			AssetDatabase.Refresh();
 		}
+
+		public static void Generate
+		(
+			string outputPath,
+			string template
+		)
+		{
+			Generate( outputPath, template, default );
+		}
 	}
 }
