@@ -24,6 +24,13 @@ namespace UniGitCommitHash
 		/// <example>
 		/// <code>
 		/// var outputPath = "Assets/Scripts/GitCommitHash.cs";
+		///
+		/// var option = new CommitLogOption
+		///	(
+		///		count: 10,
+		///		isNoMerges: false,
+		///		format: "%h %cd %cn %s"
+		/// );
 		/// 
 		/// var template = $@"public static class GitCommitHash
 		/// {{
@@ -32,7 +39,7 @@ namespace UniGitCommitHash
 		///     public const string COMMIT_LOG_TAG    = @""{GitCommitHashCodeGenerator.COMMIT_LOG_TAG}"";
 		/// }}";
 		///
-		/// GitCommitHashCodeGenerator.Generate( outputPath, template );
+		/// GitCommitHashCodeGenerator.Generate( outputPath, template, option );
 		/// </code>
 		/// </example>
 		public static void Generate
